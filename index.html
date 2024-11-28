@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Self Care Check Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
     <style>
-        /* CSS */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Comfortaa', cursive;
+            background-color: #f3f0ff;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: #4a3b61;
         }
 
         header {
@@ -21,21 +22,40 @@
             width: 100%;
             padding: 20px 0;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
             color: #4a3b61;
         }
 
         .container {
-            width: 80%;
-            max-width: 1000px;
-            margin: 20px auto;
+            width: 90%;
+            max-width: 900px;
             background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            margin-top: 20px;
         }
 
-        h1, h2, h3 {
-            color: #4a3b61;
+        .input-container, .page {
+            display: none;
+            text-align: center;
+        }
+
+        .input-container.active, .page.active {
+            display: block;
+        }
+
+        input[type="text"], input[type="date"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #d6c3e6;
+            font-size: 16px;
         }
 
         button {
@@ -46,177 +66,214 @@
             border-radius: 5px;
             cursor: pointer;
             margin: 5px;
+            font-size: 16px;
         }
 
         button:hover {
             background-color: #9b78b1;
         }
 
-        .page {
-            display: none;
+        .nav-buttons {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .page.active {
-            display: block;
+        .nav-buttons button {
+            background-color: #d6c3e6;
+            color: #4a3b61;
+            border: 1px solid #4a3b61;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #4a3b61;
+            color: white;
         }
 
         .checklist {
             list-style: none;
             padding: 0;
+            text-align: left;
+            margin: 20px auto;
         }
 
         .checklist li {
             margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .emoji {
+            font-size: 20px;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Self Care Check Journal</h1>
+        <h1>✨ Self Care Check Journal ✨</h1>
     </header>
 
     <div class="container">
-        <div id="welcome">
-            <h2>Hey! What should I call you?</h2>
+        <!-- Welcome Screen -->
+        <div id="welcome" class="input-container active">
+            <h2>Hey there! 👋 What should I call you?</h2>
             <input type="text" id="username" placeholder="Enter your name">
-            <button onclick="startJourney()">Start</button>
+            <button onclick="startJourney()">Start 📝</button>
         </div>
 
-        <div id="signup" class="page">
-            <h2>Sign Up</h2>
+        <!-- Sign Up Page -->
+        <div id="signup" class="input-container">
+            <h2>Sign Up 🎉</h2>
             <input type="text" id="name" placeholder="Your Name">
-            <input type="date" id="dob" placeholder="Date of Birth">
-            <button onclick="createDashboard()">Submit</button>
+            <input type="date" id="dob">
+            <button onclick="createDashboard()">Submit 🆗</button>
         </div>
 
+        <!-- Dashboard Page -->
         <div id="dashboard" class="page">
-            <h2>Welcome, <span id="user-name"></span>!</h2>
+            <h2>Welcome, <span id="user-name"></span>! 🌟</h2>
             <p>Select a section to view and edit your weekly checklist:</p>
-            <button onclick="showPage('skincare')">Skincare</button>
-            <button onclick="showPage('personal')">Personal</button>
-            <button onclick="showPage('gratitude')">Gratitude</button>
-            <button onclick="showPage('school')">School</button>
-            <button onclick="showPage('book-list')">Book List</button>
-            <button onclick="showPage('study-planner')">Study Planner</button>
-            <button onclick="showPage('diet')">Diet</button>
+            <div class="nav-buttons">
+                <button onclick="showPage('skincare')">💆 Skincare</button>
+                <button onclick="showPage('personal')">🧘 Personal</button>
+                <button onclick="showPage('gratitude')">🙏 Gratitude</button>
+                <button onclick="showPage('school')">📚 School</button>
+                <button onclick="showPage('book-list')">📖 Book List</button>
+                <button onclick="showPage('study-planner')">📝 Study Planner</button>
+                <button onclick="showPage('diet')">🥗 Diet</button>
+            </div>
         </div>
 
+        <!-- Skincare Page -->
         <div id="skincare" class="page">
-            <h3>Skincare Checklist</h3>
+            <h3>💆 Skincare Checklist</h3>
             <ul class="checklist">
-                <li><input type="checkbox"> Cleanse</li>
-                <li><input type="checkbox"> Facewash</li>
-                <li><input type="checkbox"> Moisturize</li>
-                <li><input type="checkbox"> Sunscreen</li>
-                <li><input type="checkbox"> Exfoliate</li>
-                <li><input type="checkbox"> Apply Serum</li>
-                <li><input type="checkbox"> Night Cream</li>
-                <li><input type="checkbox"> Eye Cream</li>
-                <li><input type="checkbox"> Face Mask</li>
-                <li><input type="checkbox"> Hydrate</li>
+                <li><input type="checkbox"> 🧖 Cleanse</li>
+                <li><input type="checkbox"> 🧼 Facewash</li>
+                <li><input type="checkbox"> 💧 Moisturize</li>
+                <li><input type="checkbox"> ☀️ Sunscreen</li>
+                <li><input type="checkbox"> 🔄 Exfoliate</li>
+                <li><input type="checkbox"> 💧 Apply Serum</li>
+                <li><input type="checkbox"> 🌙 Night Cream</li>
+                <li><input type="checkbox"> 👁️ Eye Cream</li>
+                <li><input type="checkbox"> 🛁 Face Mask</li>
+                <li><input type="checkbox"> 💦 Hydrate</li>
             </ul>
+            <button onclick="saveProgress('skincare')">Save 🛡️</button>
         </div>
 
+        <!-- Personal Page -->
         <div id="personal" class="page">
-            <h3>Personal Checklist</h3>
+            <h3>🧘 Personal Checklist</h3>
             <ul class="checklist">
-                <li><input type="checkbox"> Morning Stretch</li>
-                <li><input type="checkbox"> Meditation</li>
-                <li><input type="checkbox"> Journaling</li>
-                <li><input type="checkbox"> Gratitude Practice</li>
-                <li><input type="checkbox"> Plan the Day</li>
-                <li><input type="checkbox"> Evening Reflection</li>
-                <li><input type="checkbox"> Self-Care Activity</li>
-                <li><input type="checkbox"> Digital Detox</li>
-                <li><input type="checkbox"> Connect with Friends</li>
-                <li><input type="checkbox"> Relaxation</li>
+                <li><input type="checkbox"> 🤸 Morning Stretch</li>
+                <li><input type="checkbox"> 🧘 Meditation</li>
+                <li><input type="checkbox"> 📝 Journaling</li>
+                <li><input type="checkbox"> 🙏 Gratitude Practice</li>
+                <li><input type="checkbox"> 📅 Plan the Day</li>
+                <li><input type="checkbox"> 🌆 Evening Reflection</li>
+                <li><input type="checkbox"> 💖 Self-Care Activity</li>
+                <li><input type="checkbox"> 🚫 Digital Detox</li>
+                <li><input type="checkbox"> 👫 Connect with Friends</li>
+                <li><input type="checkbox"> 🌙 Relaxation</li>
             </ul>
+            <button onclick="saveProgress('personal')">Save 🛡️</button>
         </div>
 
+        <!-- Gratitude Page -->
         <div id="gratitude" class="page">
-            <h3>Gratitude Checklist</h3>
+            <h3>🙏 Gratitude Checklist</h3>
             <ul class="checklist">
-                <li><input type="checkbox"> Reflect on the Day</li>
-                <li><input type="checkbox"> List 3 Things I'm Grateful For</li>
-                <li><input type="checkbox"> Write a Thank-You Note</li>
-                <li><input type="checkbox"> Meditate on Gratitude</li>
-                <li><input type="checkbox"> Practice Kindness</li>
-                <li><input type="checkbox"> Keep a Gratitude Journal</li>
-                <li><input type="checkbox"> Share with Someone</li>
-                <li><input type="checkbox"> Reflect on Positive Moments</li>
-                <li><input type="checkbox"> Visualize Good Things</li>
-                <li><input type="checkbox"> Celebrate Small Wins</li>
+                <li><input type="checkbox"> 📝 Reflect on the Day</li>
+                <li><input type="checkbox"> 💭 List 3 Things I'm Grateful For</li>
+                <li><input type="checkbox"> ✉️ Write a Thank-You Note</li>
+                <li><input type="checkbox"> 🧘 Meditate on Gratitude</li>
+                <li><input type="checkbox"> 🤝 Practice Kindness</li>
+                <li><input type="checkbox"> 📖 Keep a Gratitude Journal</li>
+                <li><input type="checkbox"> 🗣️ Share with Someone</li>
+                <li><input type="checkbox"> 🌞 Reflect on Positive Moments</li>
+                <li><input type="checkbox"> ✨ Visualize Good Things</li>
+                <li><input type="checkbox"> 🎉 Celebrate Small Wins</li>
             </ul>
+            <button onclick="saveProgress('gratitude')">Save 🛡️</button>
         </div>
 
+        <!-- School Page -->
         <div id="school" class="page">
-            <h3>School Checklist</h3>
+            <h3>📚 School Checklist</h3>
             <ul class="checklist">
-                <li><input type="checkbox"> Complete Homework</li>
-                <li><input type="checkbox"> Review Notes</li>
-                <li><input type="checkbox"> Study for Exam</li>
-                <li><input type="checkbox"> Complete Assignments</li>
-                <li><input type="checkbox"> Read Textbook</li>
-                <li><input type="checkbox"> Participate in Class</li>
-                <li><input type="checkbox"> Join Study Group</li>
-                <li><input type="checkbox"> Prepare for Presentations</li>
-                <li><input type="checkbox"> Practice Problems</li>
-                <li><input type="checkbox"> Set Study Goals</li>
+                <li><input type="checkbox"> 📝 Complete Homework</li>
+                <li><input type="checkbox"> 📚 Review Notes</li>
+                <li><input type="checkbox"> 📖 Study for Exam</li>
+                <li><input type="checkbox"> 📅 Complete Assignments</li>
+                <li><input type="checkbox"> 📘 Read Textbook</li>
+                <li><input type="checkbox"> 🙋 Participate in Class</li>
+                <li><input type="checkbox"> 🤝 Join Study Group</li>
+                <li><input type="checkbox"> 🎤 Prepare for Presentations</li>
+                <li><input type="checkbox"> 🔬 Practice Problems</li>
+                <li><input type="checkbox"> 💡 Seek Help if Needed</li>
             </ul>
+            <button onclick="saveProgress('school')">Save 🛡️</button>
         </div>
 
+        <!-- Book List Page -->
         <div id="book-list" class="page">
-            <h3>Book List</h3>
+            <h3>📖 Book List</h3>
             <ul class="checklist">
-                <li><input type="checkbox"> "The Power of Now"</li>
-                <li><input type="checkbox"> "Atomic Habits"</li>
-                <li><input type="checkbox"> "The Alchemist"</li>
-                <li><input type="checkbox"> "Becoming"</li>
-                <li><input type="checkbox"> "Educated"</li>
-                <li><input type="checkbox"> "Sapiens"</li>
-                <li><input type="checkbox"> "Think and Grow Rich"</li>
-                <li><input type="checkbox"> "How to Win Friends"</li>
-                <li><input type="checkbox"> "The Subtle Art of Not Giving a F*ck"</li>
-                <li><input type="checkbox"> "Daring Greatly"</li>
+                <li><input type="checkbox"> 📚 The Power of Now</li>
+                <li><input type="checkbox"> 📚 Atomic Habits</li>
+                <li><input type="checkbox"> 📚 Mindset</li>
+                <li><input type="checkbox"> 📚 The 7 Habits of Highly Effective People</li>
+                <li><input type="checkbox"> 📚 The Subtle Art of Not Giving a F*ck</li>
+                <li><input type="checkbox"> 📚 Your Next Great Read</li>
+                <li><input type="checkbox"> 📚 Think and Grow Rich</li>
+                <li><input type="checkbox"> 📚 How to Win Friends</li>
+                <li><input type="checkbox"> 📚 The Alchemist</li>
+                <li><input type="checkbox"> 📚 Becoming</li>
             </ul>
+            <button onclick="saveProgress('book-list')">Save 🛡️</button>
         </div>
 
+        <!-- Study Planner Page -->
         <div id="study-planner" class="page">
-            <h3>Study Planner</h3>
+            <h3>📝 Study Planner Checklist</h3>
             <ul class="checklist">
-                <li><input type="checkbox"> Plan Study Sessions</li>
-                <li><input type="checkbox"> Prioritize Subjects</li>
-                <li><input type="checkbox"> Set Goals for Each Session</li>
-                <li><input type="checkbox"> Review Topics Daily</li>
-                <li><input type="checkbox"> Take Breaks</li>
-                <li><input type="checkbox"> Practice Active Recall</li>
-                <li><input type="checkbox"> Create Study Notes</li>
-                <li><input type="checkbox"> Test Yourself</li>
-                <li><input type="checkbox"> Schedule Study Time</li>
-                <li><input type="checkbox"> Evaluate Progress</li>
+                <li><input type="checkbox"> ⏰ Plan Study Sessions</li>
+                <li><input type="checkbox"> 📚 Prioritize Subjects</li>
+                <li><input type="checkbox"> 🎯 Set Goals for Each Session</li>
+                <li><input type="checkbox"> 🔄 Review Topics Daily</li>
+                <li><input type="checkbox"> 🧠 Take Breaks</li>
+                <li><input type="checkbox"> 📖 Practice Active Recall</li>
+                <li><input type="checkbox"> 📝 Create Study Notes</li>
+                <li><input type="checkbox"> 🤓 Test Yourself</li>
+                <li><input type="checkbox"> 🗓️ Schedule Study Time</li>
+                <li><input type="checkbox"> 📊 Evaluate Progress</li>
             </ul>
+            <button onclick="saveProgress('study-planner')">Save 🛡️</button>
         </div>
 
+        <!-- Diet Page -->
         <div id="diet" class="page">
-            <h3>Diet Checklist</h3>
+            <h3>🥗 Diet Checklist</h3>
             <ul class="checklist">
-                <li><input type="checkbox"> Have a Healthy Snack</li>
-                <li><input type="checkbox"> Limit Sugary Drinks</li>
-                <li><input type="checkbox"> Eat Lean Proteins</li>
-                <li><input type="checkbox"> Plan Meals Ahead</li>
-                <li><input type="checkbox"> Avoid Late-Night Eating</li>
-                <li><input type="checkbox"> Practice Portion Control</li>
-                <li><input type="checkbox"> Stay Hydrated</li>
-                <li><input type="checkbox"> Eat More Vegetables</li>
-                <li><input type="checkbox"> Choose Whole Grains</li>
-                <li><input type="checkbox"> Monitor Calorie Intake</li>
+                <li><input type="checkbox"> 🍎 Have a Healthy Snack</li>
+                <li><input type="checkbox"> 🥤 Limit Sugary Drinks</li>
+                <li><input type="checkbox"> 🍗 Eat Lean Proteins</li>
+                <li><input type="checkbox"> 🥗 Plan Meals Ahead</li>
+                <li><input type="checkbox"> 🚫 Avoid Late-Night Eating</li>
+                <li><input type="checkbox"> 🍴 Practice Portion Control</li>
+                <li><input type="checkbox"> 💧 Stay Hydrated</li>
+                <li><input type="checkbox"> 🥦 Eat More Vegetables</li>
+                <li><input type="checkbox"> 🍞 Choose Whole Grains</li>
+                <li><input type="checkbox"> 🔢 Monitor Calorie Intake</li>
             </ul>
+            <button onclick="saveProgress('diet')">Save 🛡️</button>
         </div>
     </div>
 
     <script>
-        // JavaScript
+        // JavaScript Functions
         function startJourney() {
             const name = document.getElementById('username').value;
             if (name) {
@@ -244,6 +301,10 @@
             pages.forEach(page => page.classList.remove('active'));
 
             document.getElementById(pageId).classList.add('active');
+        }
+
+        function saveProgress(pageId) {
+            alert('Progress saved for ' + pageId + ' page! 🛡️');
         }
     </script>
 </body>
